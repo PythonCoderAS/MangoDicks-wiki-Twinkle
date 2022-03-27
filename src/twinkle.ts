@@ -10,24 +10,23 @@ import { DiffCore as Diff } from './core';
 
 // register some globals for debugging, as per twinkle v2
 import './globals';
-
-// Check if account is experienced enough to use Twinkle
-if (!Morebits.userIsInGroup('autoconfirmed') && !Morebits.userIsInGroup('confirmed')) {
-	throw new Error('Twinkle: forbidden!');
-}
+import { BatchDelete } from './batchdelete';
+import { Warn } from './warn';
+import { Speedy } from './speedy';
+import { BatchUndelete } from './batchundelete';
 
 Twinkle.userAgent = `Twinkle (${mw.config.get('wgWikiID')})`;
 
 Twinkle.summaryAd = ' ([[Project:TW|TW]])';
 
-Twinkle.changeTags = '';
+Twinkle.changeTags = 'Twinkle';
 
 Twinkle.messageOverrides = messages;
 
 Twinkle.extraMwMessages = mwMessageList;
 
 // List of module classes enabled
-Twinkle.registeredModules = [Fluff, Diff];
+Twinkle.registeredModules = [Fluff, Diff, BatchDelete, BatchUndelete, Speedy, Warn];
 
 /**
  * Adjust the following configurations if necessary
